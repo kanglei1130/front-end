@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
-import {kCompanyName} from "../constants";
+import {kCompanyName} from "../helpers/constants";
 
 const useStyles = makeStyles(theme => ({
   root: {

@@ -1,6 +1,6 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography/index";
-import {kCompanyName} from "../constants";
+import {kCompanyName} from "../helpers/constants";
 
 export default class Footer extends React.Component {
   render() {

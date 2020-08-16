@@ -7,7 +7,7 @@ import { MuiThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "./css/theme";
 import App from "./containers/app";
-import { kPaths } from "./constants";
+import { kPaths } from "./helpers/constants";
 import reduxStore from "./store/index";
 
 ReactDOM.render(
