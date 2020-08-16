@@ -41,7 +41,7 @@ export default function Head() {
             {kCompanyName}
           </Typography>
           <Button color="inherit" style={{ fontSize: "16px" }}>
-            Music
+            Load Tasks
           </Button>
         </Toolbar>
       </AppBar>

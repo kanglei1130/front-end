@@ -41,6 +41,7 @@ class Home extends Component<Props> {
                   <TableCell>Name</TableCell>
                   <TableCell align="left">Stars</TableCell>
                   <TableCell align="left">URL</TableCell>
+                  <TableCell align="left">Status</TableCell>
                   <TableCell align="left">Manage</TableCell>
                 </TableRow>
               </TableHead>

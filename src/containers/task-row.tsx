@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Task} from "../store/reducers";
 import {TableCell, TableRow} from "@material-ui/core";
 import {bindActionCreators} from "redux";
-import {loadList} from "../store/actions";
+import {startTask, endTask} from "../store/actions";
 import {connect} from "react-redux";
 
 export interface TaskRowProps {
@@ -23,6 +23,7 @@ class TaskRow extends Component<TaskRowProps> {
         <TableCell component="th" scope="row">{task.name}</TableCell>
         <TableCell align="left">{task.stars}</TableCell>
         <TableCell align="left">{task.url}</TableCell>
+        <TableCell align="left">{task.name}</TableCell>
         <TableCell align="left">{task.url}</TableCell>
       </TableRow>
     )
@@ -35,7 +36,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadList: bindActionCreators(loadList, dispatch),
+    startTask: bindActionCreators(startTask, dispatch),
+    endTask: bindActionCreators(endTask, dispatch),
   };
 }
 

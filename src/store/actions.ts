@@ -1,15 +1,17 @@
 import LoadService from "../services/load-list-service";
 import {ACTION_TYPE} from "./types";
 
-interface TaskManagePayload {
-  index: number;
-  checked: boolean;
-};
-
-export function startTask(payload : TaskManagePayload) {
+export function startTask(index : number) {
   return {
-    type: ACTION_TYPE.UI_ITEM_SELECTED,
-    payload: payload
+    type: ACTION_TYPE.START_TASK,
+    payload: index
+  };
+}
+
+export function endTask(index : number) {
+  return {
+    type: ACTION_TYPE.END_TASK,
+    payload: index
   };
 }
 
