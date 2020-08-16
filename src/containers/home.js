@@ -12,8 +12,6 @@ import Paper from "@material-ui/core/Paper";
 
 import {
   loadList,
-  setItemSelected,
-  deleteItem
 } from "../actions/load-list-action";
 
 class Home extends Component {
@@ -23,27 +21,14 @@ class Home extends Component {
       current_page: 0
     };
     this.onChangePage = this.onChangePage.bind(this);
-    this.onSelected = this.onSelected.bind(this);
-    this.onDelete = this.onDelete.bind(this);
   }
   componentDidMount() {
-    this.props.loadList({ page: 1, per_page: 10 });
+    this.props.loadList();
   }
-  onChangePage(event, number) {
-    const default_per_page = 4;
-    let per_page = Math.min(
-      default_per_page,
-      this.props.total_count - (number - 1) * default_per_page
-    );
-    this.props.loadList({ page: number, per_page: per_page });
+  onChangePage(event) {
+    console.log(event);
   }
-  onSelected({ index, event }) {
-    let checked = event.target.checked;
-    this.props.setItemSelected({ index, checked });
-  }
-  onDelete({ index }) {
-    this.props.deleteItem({ index });
-  }
+
   render() {
     return (
       <div>
@@ -85,15 +70,12 @@ function mapStateToProps(state) {
   return {
     repos: state.loader.repos,
     total_count: state.loader.total_count,
-    ui: state.loader.ui
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     loadList: bindActionCreators(loadList, dispatch),
-    setItemSelected: bindActionCreators(setItemSelected, dispatch),
-    deleteItem: bindActionCreators(deleteItem, dispatch)
   };
 }
 

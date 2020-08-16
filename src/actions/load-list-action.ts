@@ -12,19 +12,3 @@ export function loadList() {
     });
   };
 }
-
-export function setItemSelected({ index, checked }) {
-  let payload = { index, checked };
-  return {
-    type: ACTION_TYPE.UI_ITEM_SELECTED,
-    payload: payload
-  };
-}
-
-export function deleteItem({ index }) {
-  let payload = { index };
-  return {
-    type: ACTION_TYPE.UI_ITEM_DELETE,
-    payload: payload
-  };
-}
