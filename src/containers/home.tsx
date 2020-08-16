@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 
 import {
   loadList,
-} from "../action-reducers/actions";
+} from "../store/actions";
 import {
   Paper,
   Table,
@@ -14,7 +14,7 @@ import {
   TableHead,
   TableRow
 } from "@material-ui/core";
-import {Repo} from "../action-reducers/reducers";
+import {Repo} from "../store/reducers";
 
 interface Props {
   repos: Repo[],
