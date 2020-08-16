@@ -8,7 +8,7 @@ export default class Footer extends React.Component {
       <footer
         style={{
           background: "#50b8e7",
-          paddingTop: "8vw",
+          paddingTop: "6vw",
           paddingBottom: "2vw",
           marginTop: "2vw"
         }}

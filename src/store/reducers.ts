@@ -1,17 +1,14 @@
 import { combineReducers } from "redux";
-import {ACTION_TYPE, ListPayload, ListPayloadAction} from "./types";
+import {
+  ACTION_TYPE,
+  ListPayload,
+  ListPayloadAction,
+  ListState,
+  Task,
+  TaskStatus
+} from "./types";
 // eslint-disable-next-line
 import update from "immutability-helper";
-
-export interface Task {
-  name: string,
-  stars: number,
-  url: string
-};
-export interface ListState {
-  length: number,
-  repos: Task[]
-};
 
 // name, login name of the owner, amount of stars and a link to the public repository page
 const initialState : ListState = {
@@ -30,7 +27,8 @@ const loader = (state = initialState, action : ListPayloadAction) => {
         let repo : Task = {
           name: repos[i].name,
           stars: repos[i].stargazers_count,
-          url: repos[i].html_url
+          url: repos[i].html_url,
+          status: TaskStatus.Idle,
         };
         arr.push(repo);
       }

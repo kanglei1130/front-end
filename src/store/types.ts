@@ -1,4 +1,6 @@
-
+/**
+ * Redux Actions
+ */
 
 export const ACTION_TYPE = {
     LOAD_SUCCEED: "LOAD_SUCCEED",
@@ -22,4 +24,26 @@ export interface ListPayload {
 export interface ListPayloadAction {
     type: string,
     payload: ListPayload,
+}
+
+/**
+ * Redux States
+ */
+
+export enum TaskStatus {
+    Idle = "Idle",
+    Started = "Running",
+    Finished = "Done"
+}
+
+export interface Task {
+    name: string,
+    stars: number,
+    url: string,
+    status: TaskStatus,
+}
+
+export interface ListState {
+    length: number,
+    repos: Task[]
 }

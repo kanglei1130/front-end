@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Task} from "../store/reducers";
+import {Task} from "../store/types";
 import {TableCell, TableRow} from "@material-ui/core";
 import {bindActionCreators} from "redux";
 import {startTask, endTask} from "../store/actions";
@@ -23,7 +23,7 @@ class TaskRow extends Component<TaskRowProps> {
         <TableCell component="th" scope="row">{task.name}</TableCell>
         <TableCell align="left">{task.stars}</TableCell>
         <TableCell align="left">{task.url}</TableCell>
-        <TableCell align="left">{task.name}</TableCell>
+        <TableCell align="left">{task.status}</TableCell>
         <TableCell align="left">{task.url}</TableCell>
       </TableRow>
     )

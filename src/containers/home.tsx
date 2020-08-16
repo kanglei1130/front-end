@@ -13,7 +13,7 @@ import {
   TableHead,
   TableRow
 } from "@material-ui/core";
-import {Task} from "../store/reducers";
+import {Task} from "../store/types";
 import TaskRow from "./task-row";
 
 interface Props {
