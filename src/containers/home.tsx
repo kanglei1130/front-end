@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
 import {
   loadList,
 } from "../store/actions";
@@ -15,28 +14,11 @@ import {
   TableRow
 } from "@material-ui/core";
 import {Task} from "../store/reducers";
+import TaskRow from "./task-row";
 
 interface Props {
   repos: Task[],
   loadList: () => {}
-};
-
-export interface TaskRowProps {
-  task: Task;
-}
-
-function TaskRow(props : TaskRowProps) {
-  let task = props.task;
-  return (
-  <TableRow key={task.name}>
-    <TableCell component="th" scope="row">
-      {task.name}
-    </TableCell>
-    <TableCell align="left">{task.stars}</TableCell>
-    <TableCell align="left">{task.url}</TableCell>
-    <TableCell align="left">{task.url}</TableCell>
-  </TableRow>
-  )
 };
 
 class Home extends Component<Props> {
