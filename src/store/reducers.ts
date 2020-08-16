@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { ACTION_TYPE } from "./types";
+import {ACTION_TYPE, ListPayload, ListPayloadAction} from "./types";
 // eslint-disable-next-line
 import update from "immutability-helper";
 
@@ -8,23 +8,22 @@ export interface Task {
   stars: number,
   url: string
 };
-export interface listState {
-  total_count: number,
+export interface ListState {
   length: number,
   repos: Task[]
 };
 
 // name, login name of the owner, amount of stars and a link to the public repository page
-const initialState : listState = {
-  total_count: 0,
+const initialState : ListState = {
   length: 0,
   repos: [],
 };
 
-const loader = (state = initialState, action) => {
+const loader = (state = initialState, action : ListPayloadAction) => {
   switch (action.type) {
     case ACTION_TYPE.LOAD_SUCCEED:
-      let repos = action.payload.items;
+      let payload : ListPayload = action.payload;
+      let repos = payload.items;
       let len = repos.length;
       let arr : Task[] = [];
       for (let i = 0; i < len; ++i) {
@@ -36,7 +35,6 @@ const loader = (state = initialState, action) => {
         arr.push(repo);
       }
       state = {
-        total_count: action.payload.total_count,
         length: len,
         repos: arr
       };
