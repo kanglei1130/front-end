@@ -11,7 +11,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "./css/theme";
 import App from "./containers/app";
 import { kPaths } from "./constants";
-import rootReducer from "./reducers/index";
+import rootReducer from "./action-reducers/reducers";
 
 const reduxStore = createStore(rootReducer, applyMiddleware(thunk, logger));
 

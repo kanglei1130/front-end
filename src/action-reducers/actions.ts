@@ -1,5 +1,5 @@
 import LoadService from "../services/load-list-service";
-import { ACTION_TYPE } from "./action-types";
+import {ACTION_TYPE} from "./types";
 
 export function loadList() {
   return function(dispatch) {
