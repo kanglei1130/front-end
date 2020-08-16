@@ -8,14 +8,13 @@ const HTTP_STATUS = {
 };
 
 const axiosConfig = {
-  crossDomain: true
+  timeout: 10000
 };
 
 export default class LoadService {
-  static loadList({ page, per_page }) {
-    let url = kListURL + "&page=" + page + "&per_page=" + per_page;
+  static loadList() {
     return axios
-      .get(url, axiosConfig)
+      .get(kListURL, axiosConfig)
       .then(res => {
         if (res.status === HTTP_STATUS.OK) {
           return res.data;

@@ -1,4 +1,4 @@
 
 export const kPaths = { HOME: "/" };
 
-export const kCompanyName = "AnyScale";
+export const kCompanyName = "Anyscale";
