@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import { ACTION_TYPE } from "./types";
 import update from "immutability-helper";
 
-export interface Repo {
+export interface Task {
   name: string,
   stars: number,
   url: string
@@ -10,7 +10,7 @@ export interface Repo {
 export interface listState {
   total_count: number,
   length: number,
-  repos: Repo[]
+  repos: Task[]
 };
 
 // name, login name of the owner, amount of stars and a link to the public repository page
@@ -25,9 +25,9 @@ const loader = (state = initialState, action) => {
     case ACTION_TYPE.LOAD_SUCCEED:
       let repos = action.payload.items;
       let len = repos.length;
-      let arr : Repo[] = [];
+      let arr : Task[] = [];
       for (let i = 0; i < len; ++i) {
-        let repo : Repo = {
+        let repo : Task = {
           name: repos[i].name,
           stars: repos[i].stargazers_count,
           url: repos[i].html_url

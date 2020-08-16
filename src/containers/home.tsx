@@ -14,11 +14,29 @@ import {
   TableHead,
   TableRow
 } from "@material-ui/core";
-import {Repo} from "../store/reducers";
+import {Task} from "../store/reducers";
 
 interface Props {
-  repos: Repo[],
+  repos: Task[],
   loadList: () => {}
+};
+
+export interface TaskRowProps {
+  task: Task;
+}
+
+function TaskRow(props : TaskRowProps) {
+  let task = props.task;
+  return (
+  <TableRow key={task.name}>
+    <TableCell component="th" scope="row">
+      {task.name}
+    </TableCell>
+    <TableCell align="left">{task.stars}</TableCell>
+    <TableCell align="left">{task.url}</TableCell>
+    <TableCell align="left">{task.url}</TableCell>
+  </TableRow>
+  )
 };
 
 class Home extends Component<Props> {
@@ -41,17 +59,12 @@ class Home extends Component<Props> {
                   <TableCell>Name</TableCell>
                   <TableCell align="left">Stars</TableCell>
                   <TableCell align="left">URL</TableCell>
+                  <TableCell align="left">Manage</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {this.props.repos.map(row => (
-                    <TableRow key={row.name}>
-                      <TableCell component="th" scope="row">
-                        {row.name}
-                      </TableCell>
-                      <TableCell align="left">{row.stars}</TableCell>
-                      <TableCell align="left">{row.url}</TableCell>
-                    </TableRow>
+                    <TaskRow task={row} />
                 ))}
               </TableBody>
             </Table>
