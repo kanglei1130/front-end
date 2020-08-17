@@ -1,5 +1,6 @@
 import LoadService from "../services/load-list-service";
 import {ACTION_TYPE} from "./types";
+import {generateTask} from "../helpers/data-generator";
 
 export function manageTask({index : number, status: TaskStatus}) {
   return {
@@ -17,6 +18,16 @@ export function deleteTask({index : number, status: TaskStatus}) {
     payload: {
       index : number,
       status : TaskStatus
+    }
+  };
+}
+
+export function loadTasks(num : number) {
+  let tasks = generateTask(num);
+  return {
+    type: ACTION_TYPE.LOAD_TASKS,
+    payload: {
+      tasks : tasks
     }
   };
 }

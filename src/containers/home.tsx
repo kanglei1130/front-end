@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
-  loadList,
+  loadList, loadTasks,
 } from "../store/actions";
 import {
   Paper,
@@ -11,25 +11,26 @@ import {
   TableBody,
   TableCell,
   TableHead,
-  TableRow
+  TableRow,
 } from "@material-ui/core";
 import {Task} from "../store/types";
 import TaskRow from "./task-row";
 
 interface Props {
-  repos: Task[],
-  loadList: () => {}
+  tasks: Task[],
+  loadList: () => {},
+  loadTasks: (num: number) => {},
 };
 
 class Home extends Component<Props> {
-
   constructor(props) {
     super(props);
     this.state = {
+
     };
   }
   componentDidMount() {
-    this.props.loadList();
+    this.props.loadTasks(10);
   }
 
   render() {
@@ -46,15 +47,15 @@ class Home extends Component<Props> {
               </colgroup>
               <TableHead>
                 <TableRow>
-                  <TableCell>Name</TableCell>
-                  <TableCell align="left">Stars</TableCell>
-                  <TableCell align="left">URL</TableCell>
+                  <TableCell>Task ID</TableCell>
+                  <TableCell align="left">Owner</TableCell>
+                  <TableCell align="left">Timer</TableCell>
                   <TableCell align="left">Status</TableCell>
                   <TableCell align="left">Manage</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {this.props.repos.map(function(row, index) {
+                {this.props.tasks.map(function(row, index) {
                    return <TaskRow key = {index} task = {row} index = {index} />
                 })}
               </TableBody>
@@ -67,13 +68,13 @@ class Home extends Component<Props> {
 
 function mapStateToProps(state) {
   return {
-    total_count: state.loader.total_count,
-    repos: state.loader.repos
+    tasks: state.loader.tasks
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
+    loadTasks: bindActionCreators(loadTasks, dispatch),
     loadList: bindActionCreators(loadList, dispatch),
   };
 }

@@ -3,12 +3,13 @@
  */
 
 export const ACTION_TYPE = {
-    LOAD_SUCCEED: "LOAD_SUCCEED",
-    LOAD_FAILED: "LOAD_FAILED",
-    START_TASK: "START_TASK",
-    END_TASK: "END_TASK",
-    MANAGE_TASK: "MANAGE_TASK",
-    DELETE_TASK: "DELETE_TASK",
+    LOAD_SUCCEED : "LOAD_SUCCEED",
+    LOAD_FAILED : "LOAD_FAILED",
+    START_TASK : "START_TASK",
+    END_TASK : "END_TASK",
+    MANAGE_TASK : "MANAGE_TASK",
+    DELETE_TASK : "DELETE_TASK",
+    LOAD_TASKS : "LOAD_TASKS",
 }
 
 export interface ListPayloadItem {
@@ -26,6 +27,13 @@ export interface ListPayloadAction {
     payload: ListPayload,
 }
 
+export interface TaskPayloadAction {
+    type: string,
+    payload: {
+        tasks: Task[]
+    },
+}
+
 export interface TaskManageAction {
     type: string,
     payload: {
@@ -34,7 +42,7 @@ export interface TaskManageAction {
     },
 }
 
-export type ActionType = ListPayloadAction | TaskManageAction;
+export type ActionType = ListPayloadAction | TaskManageAction | TaskPayloadAction;
 
 /**
  * Redux States
@@ -47,29 +55,12 @@ export enum TaskStatus {
 }
 
 export interface Task {
-    name: string,
-    stars: number,
-    url: string,
+    id: string,
+    owner: string,
+    timer: number, // in seconds
     status: TaskStatus,
 }
 
 export interface ListState {
-    length: number,
-    repos: Task[],
+    tasks: Task[],
 }
-
-/**
- * Example of NestedObject
- */
-export interface NestedObject {
-    auth: {
-        login: string;
-    }
-}
-
-// eslint-disable-next-line
-let endpoints: NestedObject = {
-    auth: {
-        login: "http://localhost:3000/auth/login"
-    }
-};

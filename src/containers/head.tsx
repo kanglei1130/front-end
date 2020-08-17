@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
-import {kCompanyName} from "../helpers/constants";
+import {kCompanyName, kPlaceholder} from "../helpers/constants";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -41,7 +41,7 @@ export default function Head() {
             {kCompanyName}
           </Typography>
           <Button color="inherit" style={{ fontSize: "16px" }}>
-            Load Tasks
+            {kPlaceholder}
           </Button>
         </Toolbar>
       </AppBar>

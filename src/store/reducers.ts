@@ -4,40 +4,43 @@ import {
   ActionType,
   ListPayload, ListPayloadAction,
   ListState,
-  Task, TaskManageAction,
+  Task, TaskManageAction, TaskPayloadAction,
   TaskStatus
 } from "./types";
-// eslint-disable-next-line
 import update from "immutability-helper";
 
-// name, login name of the owner, amount of stars and a link to the public repository page
 const initialState : ListState = {
-  length: 0,
-  repos: [],
+  tasks: [],
 };
 
 const loader = (state = initialState, action : ActionType) => {
   switch (action.type) {
-    case ACTION_TYPE.LOAD_SUCCEED:
+    case ACTION_TYPE.LOAD_TASKS: {
+      let act = action as TaskPayloadAction;
+      state = {
+        tasks: act.payload.tasks,
+      };
+      break;
+    }
+    case ACTION_TYPE.LOAD_SUCCEED: {
       let act = action as ListPayloadAction;
-      let payload : ListPayload = act.payload;
+      let payload: ListPayload = act.payload;
       let repos = payload.items;
-      let len = repos.length;
-      let arr : Task[] = [];
-      for (let i = 0; i < len; ++i) {
-        let repo : Task = {
-          name: repos[i].name,
-          stars: repos[i].stargazers_count,
-          url: repos[i].html_url,
+      let arr: Task[] = [];
+      for (let i = 0; i < repos.length; ++i) {
+        let repo: Task = {
+          id: repos[i].name,
+          timer: repos[i].stargazers_count,
+          owner: repos[i].html_url,
           status: TaskStatus.Idle,
         };
         arr.push(repo);
       }
       state = {
-        length: len,
-        repos: arr,
+        tasks: arr,
       };
       break;
+    }
     case ACTION_TYPE.LOAD_FAILED:
       break;
     case ACTION_TYPE.MANAGE_TASK: {
@@ -45,7 +48,7 @@ const loader = (state = initialState, action : ActionType) => {
       let index: number = act.payload.index;
       let status : TaskStatus = act.payload.status;
       state = update(state, {
-        repos: {
+        tasks: {
           [index]:
             {status :
                 {$set: status}
@@ -58,7 +61,7 @@ const loader = (state = initialState, action : ActionType) => {
       let act = action as TaskManageAction;
       let index: number = act.payload.index;
       state = update(state, {
-        repos: { $splice: [[index, 1]] },
+        tasks: { $splice: [[index, 1]] },
       });
       break;
     }

@@ -37,9 +37,9 @@ class TaskRow extends Component<TaskRowProps> {
     let task = this.props.task;
     return (
       <TableRow key={this.props.index}>
-        <TableCell component="th" scope="row">{task.name}</TableCell>
-        <TableCell align="left">{task.stars}</TableCell>
-        <TableCell align="left">{task.url}</TableCell>
+        <TableCell component="th" scope="row">{task.id}</TableCell>
+        <TableCell align="left">{task.owner}</TableCell>
+        <TableCell align="left">{task.timer}</TableCell>
         <TableCell align="left">{task.status}</TableCell>
         <TableCell align="left">
           <ButtonGroup color="primary" aria-label="outlined primary button group">
