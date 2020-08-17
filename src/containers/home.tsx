@@ -47,7 +47,7 @@ class Home extends Component<Props> {
               </TableHead>
               <TableBody>
                 {this.props.repos.map(function(row, index) {
-                   return <TaskRow key={index} task={row} />
+                   return <TaskRow key = {index} task = {row} index = {index} />
                 })}
               </TableBody>
             </Table>

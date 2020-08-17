@@ -1,17 +1,23 @@
 import LoadService from "../services/load-list-service";
 import {ACTION_TYPE} from "./types";
 
-export function startTask(index : number) {
+export function manageTask({index : number, status: TaskStatus}) {
   return {
-    type: ACTION_TYPE.START_TASK,
-    payload: index
+    type: ACTION_TYPE.MANAGE_TASK,
+    payload: {
+      index : number,
+      status : TaskStatus
+    }
   };
 }
 
-export function endTask(index : number) {
+export function deleteTask({index : number, status: TaskStatus}) {
   return {
-    type: ACTION_TYPE.END_TASK,
-    payload: index
+    type: ACTION_TYPE.DELETE_TASK,
+    payload: {
+      index : number,
+      status : TaskStatus
+    }
   };
 }
 

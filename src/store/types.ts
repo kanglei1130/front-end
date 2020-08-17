@@ -7,8 +7,8 @@ export const ACTION_TYPE = {
     LOAD_FAILED: "LOAD_FAILED",
     START_TASK: "START_TASK",
     END_TASK: "END_TASK",
-    UI_ITEM_SELECTED: "UI_ITEM_SELECTED",
-    UI_ITEM_DELETE: "UI_ITEM_DELETE"
+    MANAGE_TASK: "MANAGE_TASK",
+    DELETE_TASK: "DELETE_TASK",
 }
 
 export interface ListPayloadItem {
@@ -25,6 +25,16 @@ export interface ListPayloadAction {
     type: string,
     payload: ListPayload,
 }
+
+export interface TaskManageAction {
+    type: string,
+    payload: {
+        index: number,
+        status: TaskStatus
+    },
+}
+
+export type ActionType = ListPayloadAction | TaskManageAction;
 
 /**
  * Redux States
@@ -45,5 +55,21 @@ export interface Task {
 
 export interface ListState {
     length: number,
-    repos: Task[]
+    repos: Task[],
 }
+
+/**
+ * Example of NestedObject
+ */
+export interface NestedObject {
+    auth: {
+        login: string;
+    }
+}
+
+// eslint-disable-next-line
+let endpoints: NestedObject = {
+    auth: {
+        login: "http://localhost:3000/auth/login"
+    }
+};

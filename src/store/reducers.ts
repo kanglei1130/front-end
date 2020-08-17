@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import {
   ACTION_TYPE,
-  ListPayload,
-  ListPayloadAction,
+  ActionType,
+  ListPayload, ListPayloadAction,
   ListState,
-  Task,
+  Task, TaskManageAction,
   TaskStatus
 } from "./types";
 // eslint-disable-next-line
@@ -16,10 +16,11 @@ const initialState : ListState = {
   repos: [],
 };
 
-const loader = (state = initialState, action : ListPayloadAction) => {
+const loader = (state = initialState, action : ActionType) => {
   switch (action.type) {
     case ACTION_TYPE.LOAD_SUCCEED:
-      let payload : ListPayload = action.payload;
+      let act = action as ListPayloadAction;
+      let payload : ListPayload = act.payload;
       let repos = payload.items;
       let len = repos.length;
       let arr : Task[] = [];
@@ -34,11 +35,33 @@ const loader = (state = initialState, action : ListPayloadAction) => {
       }
       state = {
         length: len,
-        repos: arr
+        repos: arr,
       };
       break;
     case ACTION_TYPE.LOAD_FAILED:
       break;
+    case ACTION_TYPE.MANAGE_TASK: {
+      let act = action as TaskManageAction;
+      let index: number = act.payload.index;
+      let status : TaskStatus = act.payload.status;
+      state = update(state, {
+        repos: {
+          [index]:
+            {status :
+                {$set: status}
+            }
+        }
+      });
+      break;
+    }
+    case ACTION_TYPE.DELETE_TASK : {
+      let act = action as TaskManageAction;
+      let index: number = act.payload.index;
+      state = update(state, {
+        repos: { $splice: [[index, 1]] },
+      });
+      break;
+    }
     default:
       break;
   }
