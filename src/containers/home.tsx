@@ -22,6 +22,7 @@ interface Props {
 };
 
 class Home extends Component<Props> {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -36,6 +37,13 @@ class Home extends Component<Props> {
         <div>
           <TableContainer component={Paper}>
             <Table aria-label="simple table">
+              <colgroup>
+                <col style={{width:'10%'}}/>
+                <col style={{width:'10%'}}/>
+                <col style={{width:'20%'}}/>
+                <col style={{width:'10%'}}/>
+                <col style={{width:'20%'}}/>
+              </colgroup>
               <TableHead>
                 <TableRow>
                   <TableCell>Name</TableCell>
