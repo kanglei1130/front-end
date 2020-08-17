@@ -34,7 +34,7 @@ class Home extends Component<Props> {
 
   render() {
     return (
-        <div>
+        <div style = {{padding: 20}}>
           <TableContainer component={Paper}>
             <Table aria-label="simple table">
               <colgroup>
