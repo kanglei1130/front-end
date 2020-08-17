@@ -3,17 +3,16 @@ import {
   ACTION_TYPE,
   ActionType,
   ListPayload, ListPayloadAction,
-  ListState,
-  Task, TaskManageAction, TaskPayloadAction,
+  Task, TaskListState, TaskManageAction, TaskPayloadAction,
   TaskStatus
 } from "./types";
 import update from "immutability-helper";
 
-const initialState : ListState = {
+const initialState : TaskListState = {
   tasks: [],
 };
 
-const loader = (state = initialState, action : ActionType) => {
+const loader = (state = initialState, action : ActionType) : TaskListState => {
   switch (action.type) {
     case ACTION_TYPE.LOAD_TASKS: {
       let act = action as TaskPayloadAction;

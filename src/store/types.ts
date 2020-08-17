@@ -61,6 +61,6 @@ export interface Task {
     status: TaskStatus,
 }
 
-export interface ListState {
+export interface TaskListState {
     tasks: Task[],
 }
