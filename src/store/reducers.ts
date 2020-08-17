@@ -1,19 +1,39 @@
 import { combineReducers } from "redux";
 import {
   ACTION_TYPE,
-  ActionType,
-  ListPayload, ListPayloadAction,
-  Task, TaskListState, TaskManageAction, TaskPayloadAction,
-  TaskStatus
+  ActionType, WorkersLogAction,
+  WorkersPayloadAction,
+  WorkersState
 } from "./types";
 import update from "immutability-helper";
 
-const initialState : TaskListState = {
-  tasks: [],
+const initialState : WorkersState = {
+  workers: [],
 };
 
-const loader = (state = initialState, action : ActionType) : TaskListState => {
+const loader = (state = initialState, action : ActionType) : WorkersState => {
   switch (action.type) {
+    case ACTION_TYPE.LOAD_LOG_SUCCEED: {
+      let index = 0;
+      let act = action as WorkersLogAction;
+      state = update(state, {
+        workers: {
+          [index]:
+            {logs :
+                {$set: act.payload.result.logs}
+            }
+        }
+      });
+      break;
+    }
+    case ACTION_TYPE.LOAD_WORKERS_SUCCEED: {
+      let act = action as WorkersPayloadAction;
+      state = {
+        workers: act.payload.result.workers,
+      };
+      break;
+    }
+    /*
     case ACTION_TYPE.LOAD_TASKS: {
       let act = action as TaskPayloadAction;
       state = {
@@ -47,7 +67,7 @@ const loader = (state = initialState, action : ActionType) : TaskListState => {
       let index: number = act.payload.index;
       let status : TaskStatus = act.payload.status;
       state = update(state, {
-        tasks: {
+        workers: {
           [index]:
             {status :
                 {$set: status}
@@ -64,6 +84,7 @@ const loader = (state = initialState, action : ActionType) : TaskListState => {
       });
       break;
     }
+    */
     default:
       break;
   }

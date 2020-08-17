@@ -43,3 +43,33 @@ export function loadList() {
     });
   };
 }
+
+export function loadWorkers() {
+  return function(dispatch) {
+    return LoadService.loadWorkers().then(res => {
+      if (res) {
+        dispatch({ type: ACTION_TYPE.LOAD_WORKERS_SUCCEED, payload: res });
+      } else {
+        dispatch({ type: ACTION_TYPE.LOAD_WORKERS_FAILED, payload: null });
+      }
+    });
+  };
+}
+
+export function loadWorkerLog({index, pid, start}) {
+  return function(dispatch) {
+    return LoadService.loadWorkerLog({pid, start}).then(res => {
+      if (res) {
+        let payload = {
+          index: index,
+          pid: pid,
+          start:start,
+          result: res.result
+        };
+        dispatch({ type: ACTION_TYPE.LOAD_LOG_SUCCEED, payload: payload });
+      } else {
+        dispatch({ type: ACTION_TYPE.LOAD_LOG_FAILED, payload: null });
+      }
+    });
+  };
+}
