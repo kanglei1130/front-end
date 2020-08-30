@@ -99,7 +99,7 @@ export interface Task {
     status: TaskStatus,
 }
 
-export interface TaskListState {
+export interface ListState {
     tasks: Task[],
 }
 

@@ -1,17 +1,19 @@
 import { combineReducers } from "redux";
 import {
   ACTION_TYPE,
-  ActionType, WorkersLogAction,
-  WorkersPayloadAction,
-  WorkersState
+  ActionType,
+  ListPayload, ListPayloadAction,
+  ListState,
+  Task, TaskManageAction, TaskPayloadAction,
+  TaskStatus
 } from "./types";
 import update from "immutability-helper";
 
-const initialState : WorkersState = {
-  workers: [],
+const initialState : ListState = {
+  tasks: [],
 };
 
-const loader = (state = initialState, action : ActionType) : WorkersState => {
+const loader = (state = initialState, action : ActionType) => {
   switch (action.type) {
     case ACTION_TYPE.LOAD_LOG_SUCCEED: {
       let index = 0;
