@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
-  loadList, loadTasks, loadWorkers,
+  loadList, loadTasks,
 } from "../store/actions";
 import {
   Paper,
@@ -13,12 +13,12 @@ import {
   TableHead,
   TableRow,
 } from "@material-ui/core";
-import {Worker} from "../store/types";
-import TaskRow from "./worker-row";
+import {Task} from "../store/types";
+import TaskRow from "./task-row";
 
 interface Props {
-  workers: Worker[],
-  loadWorkers: () => {},
+  tasks: Task[],
+  loadList: () => {},
   loadTasks: (num: number) => {},
 };
 
@@ -30,13 +30,7 @@ class Home extends Component<Props> {
     };
   }
   componentDidMount() {
-    /*
-    let father = this.props;
-    window.setInterval(function(){
-      father.loadWorkers();
-    }, 1000);
-    */
-    this.props.loadWorkers();
+    this.props.loadTasks(10);
   }
 
   render() {
@@ -53,16 +47,16 @@ class Home extends Component<Props> {
               </colgroup>
               <TableHead>
                 <TableRow>
-                  <TableCell>Name</TableCell>
-                  <TableCell align="left">PID</TableCell>
-                  <TableCell align="left">Lines of Log</TableCell>
-                  <TableCell align="left">Log Preview</TableCell>
+                  <TableCell>Task ID</TableCell>
+                  <TableCell align="left">Owner</TableCell>
+                  <TableCell align="left">Timer</TableCell>
+                  <TableCell align="left">Status</TableCell>
                   <TableCell align="left">Manage</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {this.props.workers.map(function(row, index) {
-                   return <TaskRow key = {index} worker = {row} index = {index} />
+                {this.props.tasks.map(function(row, index) {
+                   return <TaskRow key = {index} task = {row} index = {index} />
                 })}
               </TableBody>
             </Table>
@@ -74,7 +68,7 @@ class Home extends Component<Props> {
 
 function mapStateToProps(state) {
   return {
-    workers: state.loader.workers
+    tasks: state.loader.tasks
   };
 }
 
@@ -82,7 +76,6 @@ function mapDispatchToProps(dispatch) {
   return {
     loadTasks: bindActionCreators(loadTasks, dispatch),
     loadList: bindActionCreators(loadList, dispatch),
-    loadWorkers: bindActionCreators(loadWorkers, dispatch),
   };
 }
 
