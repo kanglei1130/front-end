@@ -1,5 +1,5 @@
 
 export const kPaths = { HOME: "/" };
 
-export const kCompanyName = "Anyscale";
+export const kCompanyName = "Nova";
 export const kPlaceholder = "Placeholder";
