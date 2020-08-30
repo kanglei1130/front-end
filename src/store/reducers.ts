@@ -15,6 +15,27 @@ const initialState : ListState = {
 
 const loader = (state = initialState, action : ActionType) => {
   switch (action.type) {
+    case ACTION_TYPE.LOAD_LOG_SUCCEED: {
+      let index = 0;
+      let act = action as WorkersLogAction;
+      state = update(state, {
+        workers: {
+          [index]:
+            {logs :
+                {$set: act.payload.result.logs}
+            }
+        }
+      });
+      break;
+    }
+    case ACTION_TYPE.LOAD_WORKERS_SUCCEED: {
+      let act = action as WorkersPayloadAction;
+      state = {
+        workers: act.payload.result.workers,
+      };
+      break;
+    }
+    /*
     case ACTION_TYPE.LOAD_TASKS: {
       let act = action as TaskPayloadAction;
       state = {
@@ -48,7 +69,7 @@ const loader = (state = initialState, action : ActionType) => {
       let index: number = act.payload.index;
       let status : TaskStatus = act.payload.status;
       state = update(state, {
-        tasks: {
+        workers: {
           [index]:
             {status :
                 {$set: status}
@@ -65,6 +86,7 @@ const loader = (state = initialState, action : ActionType) => {
       });
       break;
     }
+    */
     default:
       break;
   }

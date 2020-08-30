@@ -10,6 +10,44 @@ export const ACTION_TYPE = {
     MANAGE_TASK : "MANAGE_TASK",
     DELETE_TASK : "DELETE_TASK",
     LOAD_TASKS : "LOAD_TASKS",
+    LOAD_WORKERS_SUCCEED : "LOAD_WORKERS_SUCCEED",
+    LOAD_WORKERS_FAILED : "LOAD_WORKERS_SUCCEED",
+    LOAD_LOG_SUCCEED : "LOAD_LOG_SUCCEED",
+    LOAD_LOG_FAILED: "LOAD_LOG_FAILED"
+}
+
+export interface WorkerLog {
+    index: number,
+    pid: number,
+    start: number,
+}
+export interface Worker {
+    name: string,
+    pid: number,
+    logLineCount: number,
+    logPreview: string[],
+    logs: string[],
+}
+
+export interface WorkersLogAction {
+    type: string,
+    payload: {
+        index: number,
+        pid: number,
+        start: number,
+        result : {
+            logs: string[]
+        }
+    }
+}
+
+export interface WorkersPayloadAction {
+    type: string,
+    payload: {
+        result : {
+            workers: Worker[]
+        }
+    }
 }
 
 export interface ListPayloadItem {
@@ -42,7 +80,7 @@ export interface TaskManageAction {
     },
 }
 
-export type ActionType = ListPayloadAction | TaskManageAction | TaskPayloadAction;
+export type ActionType = WorkersLogAction | WorkersPayloadAction;
 
 /**
  * Redux States
@@ -63,4 +101,8 @@ export interface Task {
 
 export interface ListState {
     tasks: Task[],
+}
+
+export interface WorkersState {
+    workers: Worker[],
 }
