@@ -32,6 +32,30 @@ export function loadTasks(num : number) {
   };
 }
 
+export function loadData() {
+  return function(dispatch) {
+    return LoadService.loadData().then(res => {
+      if (res) {
+        dispatch({ type: ACTION_TYPE.LOAD_DATA_SUCCEED, payload: res });
+      } else {
+        dispatch({ type: ACTION_TYPE.LOAD_DATA_FAILED, payload: null });
+      }
+    });
+  };
+}
+
+export function loadDataUpdate() {
+  return function(dispatch) {
+    return LoadService.loadDataUpdate().then(res => {
+      if (res) {
+        dispatch({ type: ACTION_TYPE.LOAD_DATA_SUCCEED, payload: res });
+      } else {
+        dispatch({ type: ACTION_TYPE.LOAD_DATA_FAILED, payload: null });
+      }
+    });
+  };
+}
+
 export function loadList() {
   return function(dispatch) {
     return LoadService.loadList().then(res => {

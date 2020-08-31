@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
-  loadList, loadTasks,
+  loadList, loadTasks, loadData
 } from "../store/actions";
 import {
   Paper,
@@ -20,6 +20,7 @@ interface Props {
   tasks: Task[],
   loadList: () => {},
   loadTasks: (num: number) => {},
+  loadData: () => {},
 };
 
 class Home extends Component<Props> {
@@ -31,6 +32,7 @@ class Home extends Component<Props> {
   }
   componentDidMount() {
     this.props.loadTasks(10);
+    this.props.loadData();
   }
 
   render() {
@@ -76,6 +78,7 @@ function mapDispatchToProps(dispatch) {
   return {
     loadTasks: bindActionCreators(loadTasks, dispatch),
     loadList: bindActionCreators(loadList, dispatch),
+    loadData: bindActionCreators(loadData, dispatch),
   };
 }
 

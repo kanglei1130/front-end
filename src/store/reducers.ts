@@ -10,6 +10,7 @@ import update from "immutability-helper";
 
 const initialState : TaskListState = {
   tasks: [],
+  data: "",
 };
 
 const loader = (state = initialState, action : ActionType) : TaskListState => {
@@ -18,6 +19,7 @@ const loader = (state = initialState, action : ActionType) : TaskListState => {
       let act = action as TaskPayloadAction;
       state = {
         tasks: act.payload.tasks,
+        data: "",
       };
       break;
     }
@@ -35,9 +37,9 @@ const loader = (state = initialState, action : ActionType) : TaskListState => {
         };
         arr.push(repo);
       }
-      state = {
-        tasks: arr,
-      };
+      state = update(state, {
+        tasks: {$set: arr}
+      });
       break;
     }
     case ACTION_TYPE.LOAD_FAILED:

@@ -3,6 +3,8 @@
  */
 
 export const ACTION_TYPE = {
+    LOAD_DATA_SUCCEED : "LOAD_DATA_SUCCEED",
+    LOAD_DATA_FAILED : "LOAD_DATA_FAILED",
     LOAD_SUCCEED : "LOAD_SUCCEED",
     LOAD_FAILED : "LOAD_FAILED",
     START_TASK : "START_TASK",
@@ -63,4 +65,5 @@ export interface Task {
 
 export interface TaskListState {
     tasks: Task[],
+    data: string
 }
